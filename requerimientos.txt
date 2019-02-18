@@ -1,0 +1,8 @@
+Django
+Pillow
+pyodbc
+django-pyodbc-azure
+django-cities
+django-excel
+pymysql
+mysql-connector-python
