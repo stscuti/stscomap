@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+  <meta charset='utf-8'>
+  <title>COMAP_2019 - {% block titulo %}{% endblock %}</title>
+  <link rel='stylesheet' href='{% static "css/base.css" %}'>
+  <link rel='shortcut icon' href='{% static "img/icono.jpg" %}'>
+  {% block style_css %}{% endblock %}
+  <script src='{% static "js/jquery-3.1.1.min.js" %}'></script>
+  <script src='{% static "js/demo.js" %}'></script>
+</head>
+<body>
+  <header>
+    <input type="checkbox" id="btn-menu">
+    <label for="btn-menu"><img src='{%static "img/iconomenu.png" %}'/></label>
+  {% block encabezado %}{% endblock %}
+  <nav class="menu">
+    <ul>
+      <li><a href='{% url "PruebaTipoInversiones" %}'>Tipo_Inversiones</a></li>
+      <li><a href='{% url "PruebaTipoContribuyente" %}'>Tipo_Contribuyente</a></li>
+      <li><a href='{% url "PruebaCuadroInversionesEmpresa" %}'>Cuadro Inversiones Empresa</a></li>
+      <li><a href='{% url "PruebaCuadroInversionesDefinitivo" %}'>Cuadro Inversiones Definitivo</a></li>
+      <li><a href='{% url "PruebaCuadroCotizacionesInterbancarias" %}'>Cuadro Cotizaciones Interbancarias</a></li>
+      <li><a href='{% url "PruebaCuadroExpBienesServicios" %}'>Cuadro Exportaciones Bienes y Servicios</a></li>
+      <li><a href='{% url "PruebaCuadroListadoDepartamentos" %}'>Cuadro Listado Departamentos</a></li>
+    </ul>
+  </nav>
+</header>
+</body>
+</html>

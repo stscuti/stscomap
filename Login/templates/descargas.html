@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+  <Div style="float: right;" class="principal"><a style="color: black;" href="{% url "home1" %}">Principal</a></Div>
+  <Div style="float: center;"><h2 style="text-align: center;">COMAP</h2></Div>
+  <Div style="float: bottom;"><p style="text-align: center;">Bienvenido a COMAP, {% if user.is_authenticated %}{{ user.username }}{% else %}Visitante{% endif %}!</p></Div>
+  <Div style="border: 1px solid #000000; -moz-border-radius: 9px; -webkit-border-radius:9px; padding: 10px;">
+  <p style="text-align: center;">
+    <strong>Descarga de Documentos: </strong></p>
+  
+  <Div class="descargas">
+  <a href= "{{ ruta }}media/Descargas/planilla-de-contralor-dto.-143-018-4-1.pdf" download= "planilla-de-contralor-dto.-143-018-4-1.pdf" class="descarga"><strong>Planilla de contralor proyectos de Inversion</strong>
+  <p class="subdescargas">Planilla de contralor de Proyectos de Inversion.</p>
+  </a>
+  </Div>  
+  
+  <Div class="descargas">
+  <a href= "{{ ruta }}media/Descargas/fit-mef_v1.xlsx" class="descarga"><strong>Formulario de Inicio de Tramite MEF</strong>
+  <p class="subdescargas">Formulario de Inicio de Tramite MEF. Proyecto Ministerio de Economia y Finanzas.</p>
+  </a>
+  </Div>
+
+  <Div class="descargas">
+  <a href= "{{ ruta }}media/Descargas/fit-miem_v1.xlsx" class="descarga"><strong>Formulario de Inicio de Tramite MIEM</strong>
+  <p class="subdescargas">Formulario de Inicio de Tramite MIEM. Proyecto Ministerio de Industria, Energia y Mineria.</p>
+  </a>
+  </Div>
+  
+  <Div class="descargas">
+  <a href= "{{ ruta }}media/Descargas/fit-mgap_v1.xlsx" class="descarga"><strong>Formulario de Inicio de Tramite MGAP</strong>
+  <p class="subdescargas">Formulario de Inicio de Tramite MGAP. Proyecto Ministerio de Ganaderia, Agricultura y Pesca.</p>
+  </a>
+  </Div>
+
+  <Div class="descargas">
+  <a href= "{{ ruta }}media/Descargas/fit-mintur_v1.xlsx" class="descarga"><strong>Formulario de Inicio de Tramite MINTUR</strong>
+  <p class="subdescargas">Formulario de Inicio de Tramite MINTUR. Proyecto Ministerio de Turismo.</p>
+  </a>
+  </Div>
+  
+  <Div class="descargas">
+  <a href= "{{ ruta }}media/Descargas/carta-compromiso.doc" class="descarga"><strong>Carta Compromiso</strong>
+  <p class="subdescargas">Carta Compromiso Proyecto de Inversion.</p>
+  </a>
+  </Div>
+  
+  <Div class="descargas">
+  <a href= "{{ ruta }}media/Descargas/formulario-bcu.xlsx" class="descarga"><strong>Formulario BCU</strong>
+  <p class="subdescargas">Formulario BCU.</p>
+  </a>
+  </Div>
+  
+  <Div class="descargas">
+  <a href= "{{ ruta }}media/Descargas/instructivo-bcu.pdf" download= "instructivo-bcu.pdf" class="descarga"><strong>Instructivo BCU</strong>
+  <p class="subdescargas">Instructivo para el Formulario de informacion para el Banco Central del Uruguay.</p>
+  </a>
+  </Div>
+  
+  <Div class="descargas">
+  <a href= "{{ ruta }}media/Descargas/formulario-anii.docx" class="descarga"><strong>Formulario ANII</strong>
+  <p class="subdescargas">Formulario ANII.</p>
+  </a>
+  </Div>
+  
+  <Div class="descargas">
+  <a href= "{{ ruta }}media/Descargas/tecnologias-limpias-web-2019.02.18-v1.xlsx" class="descarga"><strong>Formulario de Tecnologias Limpias</strong>
+  <p class="subdescargas">Formulario de Tecnologias Limpias.</p>
+  </a>
+  </Div>
+  
+  <Div class="descargas">
+  <a href= "{{ ruta }}media/Descargas/formulario-formacion-continua-y-capacitacion.docx" class="descarga"><strong>Formulario de Presentacion del Indicador "Formacion Continua y Capacitacion" (MEF, MIEM, MGAP)</strong>
+  <p class="subdescargas">Formulario de Presentacion del Indicador "Formacion Continua y Capacitacion" (MEF, MIEM, MGAP).</p>
+  </a>
+  </Div>
+  
+  <Div class="descargas">
+  <a href= "{{ ruta }}media/Descargas/cuadro-de-inversiones.xls" class="descarga"><strong>Cuadro de Inversiones</strong>
+  <p class="subdescargas">Cuadro de Inversiones en Activos Fijos.</p>
+  </a>
+  </Div>
+    
+  <Div class="descargas">
+  <a href= "{{ ruta }}media/Descargas/cronograma-de-inversiones.xls" class="descarga"><strong>Cronograma de Inversiones</strong>
+  <p class="subdescargas">Cronograma de Inversiones.</p>
+  </a>
+  </Div>
+    
+  <Div class="descargas">
+  <a href= "{{ ruta }}media/Descargas/plan-de-implementacion-plantines.docx" class="descarga"><strong>Plan de Implementacion - PLANTINES</strong>
+  <p class="subdescargas">Plan de Implementacion - Plantines.</p>
+  </a>
+  </Div>
+  
+  <Div class="descargas">
+  <a href= "{{ ruta }}media/Descargas/rubrado-de-obra-civil.xls" class="descarga"><strong>Rubrado de Obra Civil</strong>
+  <p class="subdescargas">Rubrado de Obra Civil.</p>
+  </a>
+  </Div>
+  
+  <Div class="descargas">
+  <a href= "http://www.ciu.com.uy/innovaportal/v/32811/1/innova.front/competitivo_nacional.html" class="descarga" target="_blank"><strong>Tramite NO Competitivo</strong>
+  <p class="subdescargas">En el marco de los beneficios tributarios previstos en las leyes 14.178 y 16.906 y sus decretos reglamentarios, el Poder Ejecutivo esta facultado para otorgar exoneraciones de tributos a la importacion de maquinarias y equipos que sean realizados por sujetos pasivos del Impuesto a las Actividades Empresariales.</p>
+  </a>
+  </Div>
+  
+  </Div>
+{% endblock %}

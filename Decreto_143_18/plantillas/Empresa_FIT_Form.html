@@ -1,0 +1,17 @@
+{% extends 'base_juan.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% block titulo %}Empresa_FIT{% endblock %}
+
+{% block contenido %}
+	<Div class="fondo_formularios">
+    <h2>{{ formulario.Meta.verbose_name }} </h2>
+	<form id='formulario' method='post' action='' enctype=multipart/form-data>
+	{% csrf_token %}
+	<div>{% crispy formulario %}</div>
+	
+	</form>
+	</Div>
+{% endblock %}

@@ -1,11 +1,22 @@
-{% extends 'base.html' %}
+{% extends 'base_juan.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+
 {% block titulo %}Empresa_Datos_Formales{% endblock %}
-{% block encabezado %}
-	<h1>MEF-COMAP</h1>
-{% endblock %}
+
 {% block contenido %}
-	<form id='formulario' method='post' action=''>{% csrf_token %}
-	{{formulario.as_p}}
-	<p><input type='submit' value='Confirmar'/></p>
+	
+	<Div class="fondo_formularios">
+    <h2>{{ formulario.Meta.verbose_name }} </h2>
+	<form id='formulario' method='post' action='' enctype=multipart/form-data>
+	{% csrf_token %}
+	
+	<div>{% crispy formulario %}</div>
+	
 	</form>
+	</Div>
+	
+
 {% endblock %}

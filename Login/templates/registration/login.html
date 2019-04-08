@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <h2>Iniciar sesión</h2>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            <table style="background-color: lightgrey; color:grey; margin:auto;">{{ form.as_table }}</table>
+            <p style="text-align: center;"><button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+            <a href="{% url 'password_reset' %}" class="btn btn-link">Olvidaste tu contraseña ?</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,50 @@
+#!/usr/bin/env python
+# coding=utf-8
+
+__licence__ = "GNU/GPLv3"
+__author__ = "Marcelo Zunino (InfoPrimo SL) 2017"
+
+# ##################################################################################
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU Lesser General Public License as published by the
+#  Free Software Foundation; either version 3, or (at your option) any later
+#  version.
+#
+#  This program is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+#  or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+#  for more details. <https://www.gnu.org/licenses/>
+# ##################################################################################
+# coding=utf-8
+#!/usr/bin/python
+
+from suds.client import Client
+from suds.sudsobject import asdict
+if __name__ == '__main__':    
+    client = Client("https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones?wsdl")
+    #print client
+    cotiza_obj = client.factory.create("wsbcucotizacionesin")
+    #print cotiza_obj
+    cotiza_obj.FechaDesde = "2017/10/11"
+    cotiza_obj.FechaHasta = "2017/10/11"
+    cotiza_obj.Grupo  = 2      
+    cotiza_obj.Moneda = {'item' : [2225,9800,9900]}
+    ret = client.service.Execute(cotiza_obj)
+    #print ret
+    cotizacion = asdict(ret.datoscotizaciones).items()[0][1]
+    print("\t Moneda \t\t Compra \t Venta")
+    for moneda in cotizacion:
+        print("\t %s \t %s \t %s \n" % (moneda.Nombre, moneda.TCC, moneda.TCV))
+        
+    #fecha =  cotizacion.Fecha.strftime("%d-%m-%Y")
+    #print("\n\t %s \n\t Fecha: %s\n\t Tipo Comprador: %s \n" % (cotizacion.Nombre, fecha, cotizacion.TCV,))
+
+    ## debug:
+    #  ''''''
+    #       descomentadas las dos líneas que siguen
+    #       devolverá un shell dentro del namespace
+    #       actual en ejecución.
+
+    #from IPython import embed
+    #embed()
+    #print("Ayuda: `>>> dir()` ver nombres del namespace")

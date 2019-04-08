@@ -1,0 +1,30 @@
+{% extends 'base_juan.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% load crispy_forms_tags %}
+{% crispy empresa_datos_formales_form %}
+{% block titulo %}Indicador Sectorial Mercado de Capitales{% endblock %}
+
+{% block contenido %}
+  {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {% for form in forms %}
+    <Div class="fondo_formularios">
+    <h3> {{ form.Meta.verbose_name }} </h3> 
+    
+    <form method="post" action='' enctype=multipart/form-data>
+     <input type="hidden" name="selected_form" value="{{ forloop.counter0 }}">
+      {% csrf_token %}
+      {% crispy form %}
+   
+   
+    </form>
+    </Div>
+  {% endfor %}
+{% endblock %}

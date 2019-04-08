@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 style="text-align: center;">COMAP</h2>
+  <p style="text-align: center;">Bienvenido a COMAP, {% if user.is_authenticated %}{{ user.username }}{% else %}Visitante{% endif %}!</p>
+  <p style="text-align: center;">
+    <strong>Usuarios registrados: </strong> {{ count }}
+  </p>
+{% endblock %}

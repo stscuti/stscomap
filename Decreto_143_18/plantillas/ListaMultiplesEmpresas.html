@@ -1,0 +1,716 @@
+{% extends 'base_juan.html' %}
+{% load static %}
+{% load staticfiles %}
+{% load bootstrap4 %}
+{% load humanize %}
+{% load l10n %}
+{% bootstrap_css %}
+{% block titulo %} Formulario Empresa Datos Formales {% endblock %}
+{% block contenido %}
+
+	{% localize off %}
+    <h1> Datos Proyectos</h1>
+    
+   	<!--  method="get" -->
+    <Div><p>Escoja el Proyecto:</p>
+    <form action="{% url 'LME' %}" method="get">
+    	{% csrf_token %}
+        <select name="Proyectos[]" multiple size=5>
+		{% if Expediente_Dec_143_18_Total %}
+		{% for instance in Expediente_Dec_143_18_Total %}
+      	<option>{{ instance.num_expediente }}</option>
+      	{% endfor %}
+      	{% endif %}
+    	</select>
+        <br>
+        <input type="submit" value="Escoja Expedientes">
+        <input type="submit" value="Imprima Informe">    
+    </form></Div>
+   	<!-- <h1>{{ Expediente }}</h1>
+   	<h1>{{ rs }}</h1>
+    <h1>{{ exp }}</h1> -->
+    
+    {% if Empresas_Datos_Formales %}
+    <Div class="formtitulosintermedios">Empresas: Datos Formales</Div>
+    <table class="table-responsive">
+    <thead>
+        <tr>
+           <th>Razon Social</th>
+           <th>Nombre Comercial</th>
+           <th>RUT</th>
+           <th>Numero de BPS</th>
+           <th>Numero de MTSS</th>
+           <th>Domicilio Constituido</th>
+           <th>Domicilio Fiscal</th>
+           <th>Telefono</th>
+           <th>Email</th>
+           <th>Celular</th>
+           <th>Codigo Giro CIIU</th>
+           <th>Descripcion Giro CIIU</th>
+           <th>Fecha Balance</th>
+           <th>Tipo de Contribuyente</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>{% for instance in Empresas_Datos_Formales %}
+           <td>{{ instance }}</td>
+           <td>{{ instance.nombre_comercial }}</td>
+           <td>{{ instance.rut }}</td>
+           <td>{{ instance.num_bps }}</td>
+           <td>{{ instance.num_mtss }}</td>
+           <td>{{ instance.domicilio_constituido }}</td>
+           <td>{{ instance.domicilio_fiscal }}</td>
+           <td>{{ instance.telefono }}</td>
+           <td>{{ instance.email }}</td>
+           <td>{{ instance.celular }}</td>
+           <td>{{ instance.cod_giro_ciiu }}</td>
+           <td>{{ instance.nombre_giro }}</td>
+           <td>{{ instance.fecha_balance|date:"M-d" }}</td>
+           <td>{{ instance.tipo }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+	</table>
+		{% else %}
+		<p class="formtitulosintermedios">No hay Registros de Empresas</p>
+		{% endif %}
+		<br>
+		{% endlocalize %}
+		
+		{% localize on %}
+		{% if Empresa_FIT %}
+    
+    <Div class="formtitulosintermedios">Empresas: Datos de cada Proyecto</Div>
+    <table class="table-responsive">
+    <thead>
+        <tr >
+           <th>Numero de expediente</th>
+           <th>Razon Social</th>
+           <th>Documento FIT</th>
+           <th>Empresa sin facturacion los ultimos 3 ejercicios</th>
+           <th>Tiene Empresas Vinculadas</th>
+           <th>Tiene Empresas Vinculadas sin facturacion los ultimos 3 ejercicios</th>
+           <th>Solicita Beneficio PYME</th>
+           <th>Cantidad de Empleados</th>
+           <th>Ventas Netas Anuales en UI</th>
+           <th>Ventas Netas Anuales en Pesos</th>
+           <th>Tiene Empresas Controladas</th>
+           <th>Alguna Empresa Controlada supera el limite de MYPE</th>
+           <th>Pertenece a un Grupo Economico</th>
+           <th>Alguna Empresa del Grupo Economico supera el limite de MYPE</th>
+           <th>Proyeccion de Empleos del siguiente Ejercicio</th>
+           <th>Proyeccion de Ventas Anuales en UI al siguiente Ejercicio</th>
+           <th>Declaro que Grupo Economico/Controlantes cumplen condiciones MYPE</th>
+           <th>Aplica credito fiscal por aportes patronales de articulo 28</th>
+           <th>Usuario de Parque Industrial</th>
+           <th>Objetivo del Proyecto</th>
+           <th>Descripcion ampliada del Objetivo del Proyecto</th>
+           <th>Monto de la Inversion en UI</th>
+           <th>Tipo de Cambio: Dolar utilizado</th>
+           <th>Tipo de Cambio: EURO utilizado</th>
+           <th>Tipo de Cambio: UI utilizada</th>
+           <th>Plazo de Anos de Ejecucion de la Inversion</th>
+           <th>Solicita Beneficio IRAE</th>
+           <th>Solicita Beneficio IP</th>
+           <th>Solicita Beneficio IVA</th>
+           <th>Solicita Beneficios Tributarios a la Importacion</th>
+           <th>Solicita Beneficios Transitorios</th>
+           <th>Utiliza Indicador General de Empleo</th>
+           <th>Utiliza Indicador General de Exportaciones</th>
+           <th>Utiliza Indicador General de Descentralizacion</th>
+           <th>Utiliza Indicador General de Tecnologias Limpias</th>
+           <th>Utiliza Indicador General de Investigacion, Desarrollo e innovacion</th>
+           <th>Utiliza Indicador Sectorial de Formacion Continua y Capacitacion</th>
+           <th>Utiliza Indicador Sectorial de Diferenciacion de Productos y Procesos</th>
+           <th>Utiliza Indicador Sectorial de Energias Renovables</th>
+           <th>Utiliza Indicador Sectorial de Mercado de Capitales</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>{% for instance in Empresa_FIT %}
+           <td>{{ instance.num_expediente }}</td>
+           <td>{{ instance.razon_social }}</td>
+           <td><a href="{{ruta}}{{ instance.documento_fit }}" target="_blank">Documento FIT</a></td>
+           <td>{% if instance.sin_facturacion_ult3ej %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.empresa_vinculada %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.empresa_vinculada_sfult3ej %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.beneficio_MYPE %} Si {% else %} No {% endif %}</td>
+           <td>{{ instance.cantidad_empleados|floatformat:"-1" }}</td>
+           <td>{{ instance.ventas_netas_UI|floatformat:"-1"|intcomma|localize }}</td>
+           <td>{{ instance.ventas_netas_Pesos|floatformat:0|intcomma|localize }}</td>
+           <td>{% if instance.empresa_controlada %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.empresa_controlada_supera_MYPE %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.pertenece_grupo_economico %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.grupo_economico_supera_MYPE %} Si {% else %} No {% endif %}</td>
+           <td>{{ instance.proyeccion_empleos_siguiente_ejercicio|floatformat:"-1" }}</td>
+           <td>{{ instance.proyeccion_ventas_UI_siguiente_ejercicio|floatformat:"-1"|intcomma|localize }}</td>
+           <td>{% if instance.declaro_geco_controlantes_MYPE %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.aportes_patronales_art28 %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.usuario_parque_industrial %} Si {% else %} No {% endif %}</td>
+           <td>{{ instance.objetivo_proyecto }}</td>
+           <td>{{ instance.descripcion_ampliada }}</td>
+           <td>{{ instance.monto_inversion_UI|floatformat:"-1"|intcomma|localize }}</td>
+           <td>{{ instance.tc_Dolar }}</td>
+           <td>{{ instance.tc_Euro }}</td>
+           <td>{{ instance.tc_UI }}</td>
+           <td>{{ instance.anos_ejecucion_inversion }}</td>
+           <td>{% if instance.beneficio_IRAE %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.beneficio_IP %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.beneficio_IVA %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.beneficio_tributos_importacion %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.beneficio_transitorios %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.indicadores_generales_empleo %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.indicadores_generales_exportaciones %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.indicadores_generales_descentralizacion %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.indicadores_generales_TL %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.indicadores_generales_IDi %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.indicadores_sectoriales_mef_formacion %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.indicadores_sectoriales_mef_diferenciacion %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.indicadores_sectoriales_mef_renovables %} Si {% else %} No {% endif %}</td>
+           <td>{% if instance.indicadores_sectoriales_mef_capitales %} Si {% else %} No {% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+	</table>
+		{% else %}
+		<p class="formtitulosintermedios">No hay Registros de Proyectos de Empresas</p>
+		{% endif %}
+	<br>
+	
+	{% if Expediente_Dec_143_18 %}
+    
+    <Div class="formtitulosintermedios">Documentos del Expediente de cada Proyecto</Div>
+    <table class="table-responsive">
+    <thead>
+        <tr >
+           <th>Numero de expediente</th>
+           <th>Fecha de Presentacion del Proyecto en V.U.</th>
+           <th>Documento Carta de Compromiso</th>
+           <th>Documento Certificado Notarial</th>
+           <th>Documento Formulario BCU</th>
+           <th>Documento Estados Contables</th>
+           <th>Documento Constancia DINAPYME</th>
+           <th>Documento Declaracion Jurada de IRAE</th>
+           <th>Documento Constancia CIIU</th>
+           <th>Documento Certificado DINAMA</th>
+           <th>Documento Plan de Uso de Suelos</th>
+           <th>Documento Formulario ANII</th>
+           <th>Documento Catalgos de ANII</th>
+           <th>Documento Formulario de Tecnologias Limpias</th>
+           <th>Documento Catalogo de Tecnologias Limpias</th>
+           <th>Documento Formulario de Indicador Sectorial de Formacion Continua y Capacitacion</th>
+           <th>Documento Programa de Indicador Sectorial de Formacion Continua y Capacitacion</th>
+           <th>Documento Formulario Sectorial Mercado de Capitales</th>
+           <th>Documento Constancia COMAP</th>
+           <th>Documento Certificado Unico DGI</th>
+           <th>Documento Certificado Unico BPS</th>
+           <th>Documento Cuadro de Inversiones</th>
+           <th>Documento Cronograma de Inversiones</th>
+           <th>Documento Plan Implantacion</th>
+           <th>Documento Memoria Constructiva</th>
+           <th>Documento Rubrado de Obra</th>
+           <th>Excel Rubrado de Obra</th>
+           <th>Documento Anteproyecto de Arquitectura</th>
+           <th>Documento Contrato de Arrendamiento</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>{% for instance in Expediente_Dec_143_18 %}
+           <td>{{ instance.num_expediente }}</td>
+           <td>{{ instance.fecha_presentacion }}</td>
+           <td>{% if instance.documento_carta_compromiso != "" %}<a href="{{ruta}}{{ instance.documento_carta_compromiso }}" target="_blank">Documento Carta Compromiso</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_certificado_notarial != "" %}<a href="{{ruta}}{{ instance.documento_certificado_notarial }}" target="_blank">Documento Certificado Notarial</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_formulario_bcu != "" %}<a href="{{ruta}}{{ instance.documento_formulario_bcu }}" target="_blank">Documento Formulario BCU</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_estados_contables != "" %}<a href="{{ruta}}{{ instance.documento_estados_contables }}" target="_blank">Documento Estados Contables</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_constancia_DINAPYME != "" %}<a href="{{ruta}}{{ instance.documento_constancia_DINAPYME }}" target="_blank">Documento Constancia DINAPYME</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_dj_IRAE != "" %}<a href="{{ruta}}{{ instance.documento_dj_IRAE }}" target="_blank">Documento Declaracion Jurada de IRAE</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_constancia_CIIU != "" %}<a href="{{ruta}}{{ instance.documento_constancia_CIIU }}" target="_blank">Documento Constancia CIIU</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_certificado_DINAMA != "" %}<a href="{{ruta}}{{ instance.documento_certificado_DINAMA }}" target="_blank">Documento Certificado DINAMA</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_plan_uso_suelos_DGRN != "" %}<a href="{{ruta}}{{ instance.documento_plan_uso_suelos_DGRN }}" target="_blank">Documento Plan de Uso de Suelos</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_formulario_ANII_IDi != "" %}<a href="{{ruta}}{{ instance.documento_formulario_ANII_IDi }}" target="_blank">Documento Formulario ANII</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_catalogos_ANII_IDi != "" %}<a href="{{ruta}}{{ instance.documento_catalogos_ANII_IDi }}" target="_blank">Documento Catalogos ANII</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_formulario_TL != "" %}<a href="{{ruta}}{{ instance.documento_formulario_TL }}" target="_blank">Documento Formulario T+L</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_catalogo_TL != "" %}<a href="{{ruta}}{{ instance.documento_catalogo_TL }}" target="_blank">Documento Catalogo T+L</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_formulario_sectorial_FCC != "" %}<a href="{{ruta}}{{ instance.documento_formulario_sectorial_FCC }}" target="_blank">Documento Formacion Continua</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_programa_sectorial_FCC != "" %}<a href="{{ruta}}{{ instance.documento_programa_sectorial_FCC }}" target="_blank">Documento Programa Formacion Continua</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_formulario_sectorial_MC != "" %}<a href="{{ruta}}{{ instance.documento_formulario_sectorial_MC }}" target="_blank">Documento Mercado de Capitales</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_constancia_COMAP != "" %}<a href="{{ruta}}{{ instance.documento_constancia_COMAP }}" target="_blank">Documento Constancia COMAP</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_certificado_unico_DGI != "" %}<a href="{{ruta}}{{ instance.documento_certificado_unico_DGI }}" target="_blank">Documento Certificado Unico DGI</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.documento_certificado_unico_BPS != "" %}<a href="{{ruta}}{{ instance.documento_certificado_unico_BPS }}" target="_blank">Documento Certificado Unico BPS</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.inversiones_documento_cuadro != "" %}<a href="{{ruta}}{{ instance.inversiones_documento_cuadro }}" target="_blank">Documento Cuadro de Inversiones</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.inversiones_documento_cronograma != "" %}<a href="{{ruta}}{{ instance.inversiones_documento_cronograma }}" target="_blank">Documento Cronograma de Inversiones</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.inversiones_documento_plan_implantacion != "" %}<a href="{{ruta}}{{ instance.inversiones_documento_plan_implantacion }}" target="_blank">Documento Plan Implantacion</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.inversiones_documento_memoria_constructiva != "" %}<a href="{{ruta}}{{ instance.inversiones_documento_memoria_constructiva }}" target="_blank">Documento Memoria Constructiva</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.inversiones_documento_rubrado_obra_imagen != "" %}<a href="{{ruta}}{{ instance.inversiones_documento_rubrado_obra_imagen }}" target="_blank">Documento Rubrado (Imagen)</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.inversiones_documento_rubrado_obra_excel != "" %}<a href="{{ruta}}{{ instance.inversiones_documento_rubrado_obra_excel }}" target="_blank">Documento Rubrado (Excel)</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.inversiones_documento_anteproyecto_arquitectura != "" %}<a href="{{ruta}}{{ instance.inversiones_documento_anteproyecto_arquitectura }}" target="_blank">Documento AnteProyecto</a>{% else %} s/d {% endif %}</td>
+           <td>{% if instance.inversiones_documento_contrato_arrendamiento != "" %}<a href="{{ruta}}{{ instance.inversiones_documento_contrato_arrendamiento }}" target="_blank">Documento Contrato de Arrendamiento</a>{% else %} s/d {% endif %}</td>
+           
+        </tr>
+        {% endfor %}
+    </tbody>
+	</table>
+		{% else %}
+		<p class="formtitulosintermedios">No hay Documentos de Proyectos de Empresas</p>
+		{% endif %}
+		<br>
+		
+		{% if Localizacion_Proyecto %}
+    <Div class="formtitulosintermedios">Localizacion de Proyectos</Div>
+    <table class="table-responsive">
+    <thead>
+        <tr>
+           <th>Numero de Expediente</th>
+           <th>Departamento</th>
+           <th>Localidad</th>
+           <th>Direccion</th>
+           <th>Con mejoras fijas - vinculacion juridica entre inversor y predio</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>{% for instance in Localizacion_Proyecto %}
+           <td>{{ instance.razon_social_num_exp }}</td>
+           <td>{{ instance.departamento }}</td>
+           <td>{{ instance.localidad }}</td>
+           <td>{{ instance.direccion }}</td>
+           <td>{{ instance.vinculo_juridico_inversor_predio }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+	</table>
+		{% else %}
+		<p class="formtitulosintermedios">No hay Registros de Localizacion de Proyectos de Empresas</p>
+		{% endif %}
+		<br>
+		<Div class="formtitulosintermedios" style="font-size:30px; color: black;">Registros: Indicadores Generales</Div>
+		<br>
+		
+		{% if Ind_Gral_Empleo %}
+    <Div class="formtitulosintermedios">Indicador General de Empleo</Div>
+    <table class="table-responsive">
+    <thead>
+        <tr>
+           <th>Proyecto</th>
+           <th>Cantidad de Personas equivalente a 40hs en la situacion inicial</th>
+           <th>Cantidad de Personas equivalente a 40hs en Ano 1</th>
+           <th>Cantidad de Personas equivalente a 40hs en Ano 2</th>
+           <th>Cantidad de Personas equivalente a 40hs en Ano 3</th>
+           <th>Cantidad de Personas equivalente a 40hs en Ano 4</th>
+           <th>Cantidad de Personas equivalente a 40hs en Ano 5</th>
+           <th>Menores de 25 anos en la situacion inicial</th>
+           <th>Menores de 25 anos en Ano 1</th>
+           <th>Menores de 25 anos en Ano 2</th>
+           <th>Menores de 25 anos en Ano 3</th>
+           <th>Menores de 25 anos en Ano 4</th>
+           <th>Menores de 25 anos en Ano 5</th>
+           <th>Mujeres en la situacion inicial</th>
+           <th>Mujeres en Ano 1</th>
+           <th>Mujeres en Ano 2</th>
+           <th>Mujeres en Ano 3</th>
+           <th>Mujeres en Ano 4</th>
+           <th>Mujeres en Ano 5</th>
+           <th>Discapacitados en la situacion inicial</th>
+           <th>Discapacitados en Ano 1</th>
+           <th>Discapacitados en Ano 2</th>
+           <th>Discapacitados en Ano 3</th>
+           <th>Discapacitados en Ano 4</th>
+           <th>Discapacitados en Ano 5</th>
+           <th>Trabajadores Rurales en la situacion inicial</th>
+           <th>Trabajadores Rurales en Ano 1</th>
+           <th>Trabajadores Rurales en Ano 2</th>
+           <th>Trabajadores Rurales en Ano 3</th>
+           <th>Trabajadores Rurales en Ano 4</th>
+           <th>Trabajadores Rurales en Ano 5</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>{% for instance in Ind_Gral_Empleo %}
+           <td>{{ instance.proyecto }}</td>
+           <td>{{ instance.ano0_eq40hs|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano1_eq40hs|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano2_eq40hs|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano3_eq40hs|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano4_eq40hs|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano5_eq40hs|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano0_men25|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano1_men25|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano2_men25|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano3_men25|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano4_men25|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano5_men25|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano0_muj|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano1_muj|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano2_muj|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano3_muj|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano4_muj|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano5_muj|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano0_discap|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano1_discap|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano2_discap|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano3_discap|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano4_discap|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano5_discap|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano0_rural|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano1_rural|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano2_rural|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano3_rural|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano4_rural|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano5_rural|floatformat:"-2"|intcomma|localize }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+	</table>
+		{% else %}
+		<p class="formtitulosintermedios">No hay Registros para Indicador General Empleo</p>
+		{% endif %}
+		<br>
+
+	{% if Ind_Gral_Exportaciones %}
+    <Div class="formtitulosintermedios">Indicador General Exportaciones</Div>
+    <table class="table-responsive">
+    <thead>
+        <tr>
+           <th>Proyecto</th>
+           <th>Tipo de Exportacion</th>
+           <th>Descripcion de Exportacion</th>
+           <th>Exportaciones Ano 0</th>
+           <th>Exportaciones Ano 1</th>
+           <th>Exportaciones Ano 2</th>
+           <th>Exportaciones Ano 3</th>
+           <th>Exportaciones Ano 4</th>
+           <th>Exportaciones Ano 5</th>  
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>{% for instance in Ind_Gral_Exportaciones %}
+           <td>{{ instance.proyecto }}</td>
+           <td>{{ instance.tipo }}</td>
+           <td>{{ instance.descripcion }}</td>
+           <td>{{ instance.ano0|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano1|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano2|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano3|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano4|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano5|floatformat:"-2"|intcomma|localize }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+	</table>
+		{% else %}
+		<p class="formtitulosintermedios">No hay Registros para Indicador General Exportaciones</p>
+		{% endif %}
+		<br>
+		
+		{% if Ind_Gral_Localizacion %}
+    <Div class="formtitulosintermedios">Indicador General Descentralizacion</Div>
+    <table class="table-responsive">
+    <thead>
+        <tr>
+           <th>Proyecto</th>
+           <th>Localizacion</th>
+           <th>Ya tenia Operaciones:</th>
+           <th>Departamento</th>
+           <th>Inversion Total en UI</th> 
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>{% for instance in Ind_Gral_Localizacion %}
+           <td>{{ instance.proyecto }}</td>
+           <td>{{ instance.localizacion }}</td>
+           <td>{{ instance.operaciones }}</td>
+           <td>{{ instance.departamento }}</td>
+           <td>{{ instance.inversion_UI|floatformat:"-2"|intcomma|localize }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+	</table>
+		{% else %}
+		<p class="formtitulosintermedios">No hay Registros para Indicador General Descentralizacion</p>
+		{% endif %}
+		<br>
+		
+		{% if Ind_Gral_TL %}
+    <Div class="formtitulosintermedios">Indicador General Tecnologias Limpias</Div>
+    <table class="table-responsive">
+    <thead>
+        <tr>
+           <th>Proyecto</th>
+           <th>Descripcion de Inversion en Tecnologias Limpias</th>
+           <th>Inversiones en Tecnologias Limpias Ano 1 en UI</th>
+           <th>Inversiones en Tecnologias Limpias Ano 1 en UI</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>{% for instance in Ind_Gral_TL %}
+           <td>{{ instance.proyecto }}</td>
+           <td>{{ instance.detalle }}</td>
+           <td>{{ instance.ano1|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano2|floatformat:"-2"|intcomma|localize }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+	</table>
+		{% else %}
+		<p class="formtitulosintermedios">No hay Registros para Indicador General Tecnologias + Limpias</p>
+		{% endif %}
+		<br>
+		
+		{% if Ind_Gral_IDi %}
+    <Div class="formtitulosintermedios">Indicador General Investigacion, Desarrollo e innovacion</Div>
+    <table class="table-responsive">
+    <thead>
+        <tr>
+           <th>Proyecto</th>
+           <th>Descripcion de Inversion en Investigacion, Desarrollo e innovacion</th>
+           <th>Inversiones en Investigacion, Desarrollo e innovacion Ano 1 en UI</th>
+           <th>Inversiones en Investigacion, Desarrollo e innovacion Ano 2 en UI</th> 
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>{% for instance in Ind_Gral_IDi %}
+           <td>{{ instance.proyecto }}</td>
+           <td>{{ instance.detalle }}</td>
+           <td>{{ instance.ano1|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano2|floatformat:"-2"|intcomma|localize }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+	</table>
+		{% else %}
+		<p class="formtitulosintermedios">No hay Registros para Indicador General Investigacion, Desarrollo e innovacion</p>
+		{% endif %}
+		<br>
+
+	<Div class="formtitulosintermedios" style="font-size:30px; color: black;">Registros: Indicadores Sectoriales</Div>
+		<br>
+		
+	{% if Ind_Sect_Formacion_Continua %}
+    <Div class="formtitulosintermedios">Indicador Sectorial en Formacion Continua y Capacitacion</Div>
+    <table class="table-responsive">
+    <thead>
+        <tr>
+           <th>Proyecto</th>
+           <th>Entidad Capacitadora</th>
+           <th>Titulo/Tema de la Capacitacion</th>
+           <th>Carga Horaria de la Capacitacion</th>
+           <th>Personal Capacitado en el ano 1</th>
+           <th>Personal Capacitado en el ano 2</th>
+           <th>Personal Capacitado en el ano 3</th>
+           <th>Personal Capacitado en el ano 4</th>
+           <th>Personal Capacitado en el ano 5</th> 
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>{% for instance in Ind_Sect_Formacion_Continua %}
+           <td>{{ instance.proyecto }}</td>
+           <td>{{ instance.entidad }}</td>
+           <td>{{ instance.tema_capacitacion }}</td>
+           <td>{{ instance.cargahoraria }}</td>
+           <td>{{ instance.ano1|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano2|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano3|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano4|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano5|floatformat:"-2"|intcomma|localize }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+	</table>
+		{% else %}
+		<p class="formtitulosintermedios">No hay Registros para Indicador Sectorial Formacion Continua y Capacitacion</p>
+		{% endif %}
+		<br>
+
+	{% if Ind_Sect_Diferenciacion_Prod_Proc %}
+    <Div class="formtitulosintermedios">Indicador Sectorial en Diferenciacion de Productos y Procesos</Div>
+    <table class="table-responsive">
+    <thead>
+        <tr>
+           <th>Proyecto</th>
+           <th>Entidad Certificadora</th>
+           <th>Descripcion de Certificacion</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>{% for instance in Ind_Sect_Diferenciacion_Prod_Proc %}
+           <td>{{ instance.proyecto }}</td>
+           <td>{{ instance.entidad }}</td>
+           <td>{{ instance.certificacion }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+	</table>
+		{% else %}
+		<p class="formtitulosintermedios">No hay Registros para Indicador Sectorial Diferenciacion de Productos y Procesos</p>
+		{% endif %}
+		<br>
+
+	{% if Ind_Sect_Energia_Renovable %}
+    <Div class="formtitulosintermedios">Indicador Sectorial en Energias Renovables</Div>
+    <table class="table-responsive">
+    <thead>
+        <tr>
+           <th>Proyecto</th>
+           <th>Descripcion de Fuente de Energias Renovables</th>
+           <th>Inversion en Energias Renovables Ano 1 expresado en UI</th>
+           <th>Inversion en Energias Renovables Ano 2 expresado en UI</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>{% for instance in Ind_Sect_Energia_Renovable %}
+           <td>{{ instance.proyecto }}</td>
+           <td>{{ instance.fuente }}</td>
+           <td>{{ instance.ano1|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.ano2|floatformat:"-2"|intcomma|localize }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+	</table>
+		{% else %}
+		<p class="formtitulosintermedios">No hay Registros para Indicador Sectorial Energias Renovables</p>
+		{% endif %}
+		<br>
+
+	{% if Ind_Sect_Mercado_Capitales %}
+    <Div class="formtitulosintermedios">Indicador Sectorial Mercado de Capitales</Div>
+    <table class="table-responsive">
+    <thead>
+        <tr>
+           <th>Proyecto</th>
+           <th>Emision de Acciones en UI</th>
+           <th>Emision de Titulos de Deuda en UI</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>{% for instance in Ind_Sect_Mercado_Capitales %}
+           <td>{{ instance.proyecto }}</td>
+           <td>{{ instance.acciones|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.titulos_deuda|floatformat:"-2"|intcomma|localize }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+	</table>
+		{% else %}
+		<p class="formtitulosintermedios">No hay Registros para Indicador Sectorial Mercado de Capitales</p>
+		{% endif %}
+		<br>
+		
+		<Div class="formtitulosintermedios" style="font-size:30px; color: black;">Propietarios, Directores, Representantes y Contactos por el Proyecto</Div>
+		<br>
+		
+		{% if Propietarios_Directores_Representantes %}
+    <Div class="formtitulosintermedios">Propietarios, Directores y Representantes</Div>
+    <table class="table-responsive">
+    <thead>
+        <tr>
+           <th>Proyecto</th>
+           <th>Nombre del Propietario/Director/Representante</th>
+           <th>Direccion</th>
+           <th>Cedula de Identidad</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>{% for instance in Propietarios_Directores_Representantes %}
+           <td>{{ instance.proyecto }}</td>
+           <td>{{ instance.nombre }}</td>
+           <td>{{ instance.direccion }}</td>
+           <td>{{ instance.ci }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+	</table>
+		{% else %}
+		<p class="formtitulosintermedios">No hay Registros para Propietarios, Directores y Representantes de Empresas</p>
+		{% endif %}
+		<br>
+		
+		{% if Contactos_Proyecto %}
+    <Div class="formtitulosintermedios">Contactos por el Proyecto</Div>
+    <table class="table-responsive">
+    <thead>
+        <tr>
+           <th>Proyecto</th>
+           <th>Nombre del Contacto para el Proyecto</th>
+           <th>Direccion</th>
+           <th>Cedula de Identidad</th>
+           <th>Telefono de Contacto</th>
+           <th>Email de Contacto</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>{% for instance in Contactos_Proyecto %}
+           <td>{{ instance.proyecto }}</td>
+           <td>{{ instance.nombre }}</td>
+           <td>{{ instance.direccion }}</td>
+           <td>{{ instance.ci }}</td>
+           <td>{{ instance.telefono }}</td>
+           <td>{{ instance.mail }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+	</table>
+		{% else %}
+		<p class="formtitulosintermedios">No hay Registros para Contactos por el Proyecto</p>
+		{% endif %}
+		<br>
+		
+		
+		<Div class="formtitulosintermedios" style="font-size:30px; color: black;">Cuadro de Inversiones</Div>
+		<br>
+		
+		{% if Cuadro_Inversiones_Empresa %}
+    <Div class="formtitulosintermedios">Cuadro de Inversiones: Empresa</Div>
+    <table class="table-responsive">
+    <thead>
+        <tr>
+           <th>Proyecto</th>
+           <th>Descripcion Inversion</th>
+           <th>Tipo de Inversion</th>
+           <th>Ejecutado/Presupuesto</th>
+           <th>Numero de Documento de Comprobante</th>
+           <th>Indicador Relacionado</th>
+           <th>Fecha</th>
+           <th>Plaza/Importado</th>
+           <th>Nuevo/Usado</th>
+           <th>Cantidad</th>
+           <th>Proveedor</th>
+           <th>Moneda Origen</th>
+           <th>Costo Moneda Origen</th>
+           <th>Total de Inversion en UI</th>
+           <th>Vida Util en Anos</th>
+           <th>UI utilizada</th>
+           <th>USD utilizado</th>
+           <th>EURO utilizado</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>{% for instance in Cuadro_Inversiones_Empresa %}
+           <td>{{ instance.proyecto }}</td>
+           <td>{{ instance.descripcion }}</td>
+           <td>{{ instance.tipo_inversion }}</td>
+           <td>{{ instance.ejecucion }}</td>
+           <td>{{ instance.numero_documento }}</td>
+           <td>{{ instance.indicador_relacionado }}</td>
+           <td>{{ instance.fecha }}</td>
+           <td>{{ instance.compra }}</td>
+           <td>{{ instance.nuevo_usado }}</td>
+           <td>{{ instance.cantidad|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.proveedor }}</td>
+           <td>{{ instance.moneda_origen }}</td>
+           <td>{{ instance.costo_moneda_origen|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.total_inversiones_UI|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.vida_util_anos|floatformat:"-2"|intcomma|localize }}</td>
+           <td>{{ instance.UI_utilizada }}</td>
+           <td>{{ instance.USD_utilizado }}</td>
+           <td>{{ instance.EUR_utilizado }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+	</table>
+		{% else %}
+		<p class="formtitulosintermedios">No hay Registros para Cuadro de Inversion Empresas</p>
+		{% endif %}
+		<br>
+
+{% endlocalize %}	
+{% endblock %}

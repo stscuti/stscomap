@@ -1,0 +1,53 @@
+{% extends 'base_juan.html' %}
+{% block titulo %} Formulario Empresa Datos Formales {% endblock %}
+{% block contenido %}
+
+    <h1> Empresa</h1>
+	
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+           <th>Razon Social</th>
+           <th>Nombre Comercial</th>
+           <th>RUT</th>
+           <th>Numero de BPS</th>
+           <th>Numero de MTSS</th>
+           <th>Domicilio Constituido</th>
+           <th>Domicilio Fiscal</th>
+           <th>Telefono</th>
+           <th>Email</th>
+           <th>Celular</th>
+           <th>Codigo Giro CIIU</th>
+           <th>Descripcion Giro CIIU</th>
+           <th>Fecha Balance</th>
+           <th>Tipo de Contribuyente</th>
+        </tr>
+    </thead>
+    <tbody>
+    	{% if object_list %}
+    	<tr>{% for instance in object_list %}
+           <td>{{ instance }}</td>
+           <td>{{ instance.nombre_comercial }}</td>
+           <td>{{ instance.rut }}</td>
+           <td>{{ instance.num_bps }}</td>
+           <td>{{ instance.num_mtss }}</td>
+           <td>{{ instance.domicilio_constituido }}</td>
+           <td>{{ instance.domicilio_fiscal }}</td>
+           <td>{{ instance.telefono }}</td>
+           <td>{{ instance.email }}</td>
+           <td>{{ instance.celular }}</td>
+           <td>{{ instance.cod_giro_ciiu }}</td>
+           <td>{{ instance.nombre_giro }}</td>
+           <td>{{ instance.fecha_balance|date:"M-d" }}</td>
+           <td>{{ instance.tipo }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+		{% else %}
+		<h1>No hay Registros de Empresas</h1>
+		{% endif %}	
+    <a href="{% url 'pdf' %}">
+        <input type="button" class="btn-primary" value="Imprimir"/>
+    </a>
+{% endblock %}

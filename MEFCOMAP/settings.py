@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from django.conf.global_settings import USE_THOUSAND_SEPARATOR
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,8 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Decreto_143_18'
+    'Decreto_143_18',
+    'Login',
+    'bootstrap4',
+    'crispy_forms',
+    'django.contrib.humanize',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -58,6 +65,8 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'plantillas/'),
             os.path.join(BASE_DIR, 'Decreto_143_18/plantillas/'),
+            os.path.join(BASE_DIR, 'Login/templates'),
+            os.path.join(BASE_DIR, 'Login/templates/registration'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -80,6 +89,7 @@ WSGI_APPLICATION = 'MEFCOMAP.wsgi.application'
 DATABASES = { 
     'default': {
         'ENGINE': 'mysql.connector.django',
+        'charset': 'utf8mb4',  # The characterset you need
         'NAME': 'db_sts_mefcomap',
         'USER': 'STS',
         'PASSWORD': 'STS',
@@ -125,6 +135,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+THOUSAND_SEPARATOR="."
 
 
 # Static files (CSS, JavaScript, Images)

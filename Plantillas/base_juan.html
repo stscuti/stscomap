@@ -1,0 +1,108 @@
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+  <meta charset='utf-8'>
+  <title>COMAP_2019 - {% block titulo %}{% endblock %}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel='stylesheet' href='{% static "css/base.css" %}'>
+  <link rel='shortcut icon' href='{% static "img/icono.jpg" %}'>
+  
+  <!-- Bootstrap 4 -->
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
+
+    <!-- Tempus Dominus Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
+  
+
+  {% block style_css %}{% endblock %}
+  <script src='{% static "js/jquery-3.1.1.min.js" %}'></script>
+  <script src='{% static "js/demo.js" %}'></script>
+</head>
+<body>
+  <header>
+    
+    <input type="checkbox" id="btn-menu">
+    <label for="btn-menu"><img src='{%static "img/iconomenu.png" %}'/></label>
+  {% block encabezado %}<div class="principal"><a href="{% url "home1" %}" class="principal">Principal</a></div><h1>MEF-COMAP</h1>{% endblock %}
+
+  <nav class="menu">
+    <ul>
+      <!--li><a href='{% url "login" %}'>Login</a></li-->
+      <li><a href='{% url "PruebaPrincipal" %}'>Empresa Datos Formales</a></li>
+        <li><a href='{% url "PruebaFIT" %}'>Empresa FIT</a></li>
+         <!--<li><a href='{% url "PruebaTipoInversiones" %}'>Tipo_Inversiones</a></li>-->
+          <!--<li><a href='{% url "PruebaTipoContribuyente" %}'>Tipo_Contribuyente</a></li>-->
+          <li><a href='{% url "PruebaExpedienteDec14318" %}'>Expediente Decreto 143/18</a></li>
+          <li><a href='{% url "PruebaLocalizacionProyecto" %}'>Localizacion Proyecto</a></li>
+          <!--<li><a href='{% url "PruebaCuadroInversionesDefinitivo" %}'>Cuadro Inversiones Definitivo</a></li>-->
+          <!--<li><a href='{% url "PruebaCuadroCotizacionesInterbancarias" %}'>Cuadro Cotizaciones Interbancarias</a></li>-->
+          <li><a href='{% url "PruebaCuadroIndGralEmpleo" %}'>Cuadro Indicador General de Empleo</a></li>
+          <!--<li><a href='{% url "PruebaCuadroExpBienesServicios" %}'>Cuadro Exportaciones Bienes y Servicios</a></li>-->
+          <li><a href='{% url "PruebaCuadroIndGralExportaciones" %}'>Cuadro Indicador General Exportaciones</a></li>
+          <!--<li><a href='{% url "PruebaCuadroLocalizacionOperaciones" %}'>Cuadro Localizacion Operaciones</a></li>-->
+          <!--<li><a href='{% url "PruebaCuadroListadoDepartamentos" %}'>Cuadro Listado Departamentos</a></li>-->
+          <li><a href='{% url "PruebaCuadroInd_Gral_Localizacion" %}'>Cuadro Indicador General Descentralización</a></li>
+          <li><a href='{% url "PruebaCuadroIndGralTL" %}'>Cuadro Indicador General Tecnologías Limpias</a></li>
+          <li><a href='{% url "PruebaCuadroIndGralIDi" %}'>Cuadro Indicador General Investigación, Desarrollo e innovación</a></li>
+          <li><a href='{% url "PruebaCuadroIndSectFormCont" %}'>Cuadro Indicador Sectorial: Formación Continua y Capacitación</a></li>
+          <li><a href='{% url "PruebaCuadroIndSectDifProProc" %}'>Cuadro Indicador Sectorial: Diferenciación de Productos y Procesos</a></li>
+          <li><a href='{% url "PruebaCuadroIndSectEnergiaRenovable" %}'>Cuadro Indicador Sectorial: Energías Renovables</a></li>
+          <li><a href='{% url "PruebaCuadroIndSectMercadoCapitales" %}'>Cuadro Indicador Sectorial: Mercado de Capitales</a></li>
+          <li><a href='{% url "PruebaCuadroPropietarios" %}'>Cuadro Propietarios, Directores y Representantes</a></li>
+          <li><a href='{% url "PruebaCuadroContactosProyecto" %}'>Cuadro Contactos del Proyecto</a></li>
+          <li><a href='{% url "PruebaCuadroInversionesEmpresa" %}'>Cuadro Inversiones Empresa</a></li>
+          <li><a href='{% url "RegistroEmpresa" %}'>Registro Empresa</a></li>
+          <li><a href='{% url "ListaEmpresaDatosFormales" %}'>Lista Empresas</a></li>
+          <li><a href='{% url "ListaMultipleEmpresa" %}'>Lista Multiple Empresas</a></li>
+          <li><a href='{% url "PruebaContacto" %}'>Contacto</a></li>
+
+    </ul>
+  </nav>
+  <hr>
+  </header>
+  
+
+  <section class='contenido'>
+    
+
+    <div class="fondo">
+
+      <br><br>
+      
+      <br><br>
+      <h2 class="proyectos">Proyectos de Inversión</h2>
+      <br>
+      
+    </div>
+
+    
+  {% block contenido %}{% endblock %}
+  </section>
+  
+  <footer><br><br>
+  <p>Proyecto de ejemplo para Django COMAP_2019 &copy;2019</p>
+  <div class="logosts">ST.&.S<span class="logosts1"></span></div>
+  
+  </footer>
+  
+{% bootstrap_javascript jquery='full' %}
+	<script>
+      $(function () {
+        $("#datepicker1").datepicker();
+      });
+    </script>
+</body>
+</html>

@@ -6,3 +6,14 @@ django-cities
 django-excel
 pymysql
 mysql-connector-python
+
+django-crispy-forms
+pytz
+client
+suds
+requests
+dateutils
+datetime
+clients
+django-bootstrap4
+reportlab
