@@ -81,7 +81,7 @@ from operator import attrgetter
 from django.utils import timezone
 import datetime
 
-from rlextra.rml2pdf import rml2pdf
+"from rlextra.rml2pdf import rml2pdf
 #import cStringIO
 
 # Create your views here.
@@ -700,7 +700,7 @@ def crear_pdf(request, pk):
     p = canvas.Canvas(buffer)
 
     # Dibujamos cosas en el PDF. Aqui se genera el PDF.
-    # Consulta la documentación de ReportLab para una lista completa de funcionalidades.
+    # Consulta la documentaciÃ³n de ReportLab para una lista completa de funcionalidades.
     p.drawString(100, 800, "Razon Social: " + str(qs1.razon_social))
     p.drawString(100, 780, "Nombre Comercial: " + str(qs1.nombre_comercial))
     p.drawString(100, 760, "RUT: " +  str(qs1.rut))
