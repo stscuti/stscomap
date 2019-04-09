@@ -84,7 +84,7 @@ import datetime
 <<<<<<< HEAD
 #from rlextra.rml2pdf import rml2pdf
 =======
-from rlextra.rml2pdf import rml2pdf
+#from rlextra.rml2pdf import rml2pdf
 >>>>>>> sts3
 #import cStringIO
 
@@ -705,9 +705,9 @@ def crear_pdf(request, pk):
 
     # Dibujamos cosas en el PDF. Aqui se genera el PDF.
 <<<<<<< HEAD
-    # Consulta la documentación de ReportLab para una lista completa de funcionalidades.
+    # Consulta la documentaciÃ³n de ReportLab para una lista completa de funcionalidades.
 =======
-    # Consulta la documentaci�n de ReportLab para una lista completa de funcionalidades.
+    # Consulta la documentación de ReportLab para una lista completa de funcionalidades.
 >>>>>>> sts3
     p.drawString(100, 800, "Razon Social: " + str(qs1.razon_social))
     p.drawString(100, 780, "Nombre Comercial: " + str(qs1.nombre_comercial))
