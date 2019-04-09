@@ -81,7 +81,7 @@ from operator import attrgetter
 from django.utils import timezone
 import datetime
 
-"from rlextra.rml2pdf import rml2pdf
+#from rlextra.rml2pdf import rml2pdf
 #import cStringIO
 
 # Create your views here.
