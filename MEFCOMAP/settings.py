@@ -26,7 +26,7 @@ SECRET_KEY = '&awk7oi0f+^*@b%*297w$&52)d#=$=1ylv05l8rqnw%j5*x461'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', ' . pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', ' stscomap.mysql.pythonanywhere-services.com]
 
 
 # Application definition
@@ -90,10 +90,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'mysql.connector.django',
         'charset': 'utf8mb4',  # The characterset you need
-        'NAME': 'db_sts_mefcomap',
-        'USER': 'STS',
-        'PASSWORD': 'STS',
-        'HOST': 'localhost',
+        'NAME': 'stscomap$default',
+        'USER': 'stscomap@10.0.0.55',
+        'PASSWORD': '',
+        'HOST': 'www.pythonanywhere.com',
         'PORT': '3306',
         'OPTIONS': {
           'autocommit': True,
