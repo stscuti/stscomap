@@ -26,7 +26,7 @@ SECRET_KEY = '&awk7oi0f+^*@b%*297w$&52)d#=$=1ylv05l8rqnw%j5*x461'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', ' stscomap.mysql.pythonanywhere-services.com]
+ALLOWED_HOSTS = ['127.0.0.1', ' .pythonanywhere.com]
 
 
 # Application definition
